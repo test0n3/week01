@@ -1,44 +1,54 @@
+# Source: https://github.com/ableco/code-school/blob/master/modules/1/exercises/04c-bmi-calculator.md
 # Body Mass Index
 
-system "clear"
+system 'clear'
+
 peso = 0.0
 estatura = 0.0
 
-# verifica si número
+# verifgy if input is a number.
 def verifica(numero)
-    return !(numero.is_a? Numeric) || numero == 0.0
+  puts "value of verifica: #{!(numero.is_a? Numeric) || numero < 1.0}"
+  if (numero.is_a? Numeric) 
+    if (numero > 1.0)
+      return true
+    end
+  end
+  return false
 end
 
-#Cálculo de indice de masa corporal
-def bmiCalc(peso, estatura)
-    peso/(estatura**2)
+# Get BMI value
+def bmi_calc(peso, estatura)
+  peso / (estatura.to_f ** 2)
 end
 
 loop do
-    puts "Ingrese Peso en kg:"
-    peso = gets.chomp
-    break if verifica(peso)
+  puts 'Input weight in kilograms: '
+  peso = gets.chomp
+  break if verifica(peso)
 end
 
 loop do
-    puts "Ingrese Estatura en m:"
-    estatura = gets.chomp
-    break if verifica(estatura)
+  puts 'Input height in meters: '
+  estatura = gets.chomp
+  break if verifica(estatura)
 end
 
-test = bmiCalc(peso.to_f, estatura.to_f)
+test = bmi_calc(peso.to_f, estatura.to_f)
 
 case test
 when 1...18.5
-    texto = "#{test}: Underweight"
+  texto = "#{test}: Underweight"
 when 18.5...25
-    texto = "#{test}: Healthy weight"
+  texto = "#{test}: Healthy weight"
 when 25...30
-    texto = "#{test}: Overweight"
+  texto = "#{test}: Overweight"
 when 30..39.9
-    texto = "#{test}: Obesity"
-else 
-    texto = "#{test}: Morbid obesity"
+  texto = "#{test}: Obesity"
+when 40..100
+  texto = "#{test}: Morbid obesity"
+else
+  texto = 'Not a valid value'
 end
 
-puts "#{texto}"
+puts texto
