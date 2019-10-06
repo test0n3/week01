@@ -6,20 +6,15 @@ system 'clear'
 peso = 0.0
 estatura = 0.0
 
-# verifgy if input is a number.
+# verify if input is a number.
+# source: https://stackoverflow.com/questions/1235863/how-to-test-if-a-string-is-basically-an-integer-in-quotes-using-ruby
 def verifica(numero)
-  puts "value of verifica: #{!(numero.is_a? Numeric) || numero < 1.0}"
-  if (numero.is_a? Numeric) 
-    if (numero > 1.0)
-      return true
-    end
-  end
-  return false
+  true if (Float(numero)) && (Float(numero) > 1.0) rescue false
 end
 
 # Get BMI value
 def bmi_calc(peso, estatura)
-  peso / (estatura.to_f ** 2)
+  peso / (estatura.to_f**2)
 end
 
 loop do
@@ -38,17 +33,15 @@ test = bmi_calc(peso.to_f, estatura.to_f)
 
 case test
 when 1...18.5
-  texto = "#{test}: Underweight"
+  puts "#{test}: Underweight"
 when 18.5...25
-  texto = "#{test}: Healthy weight"
+  puts "#{test}: Healthy weight"
 when 25...30
-  texto = "#{test}: Overweight"
+  puts "#{test}: Overweight"
 when 30..39.9
-  texto = "#{test}: Obesity"
+  puts "#{test}: Obesity"
 when 40..100
-  texto = "#{test}: Morbid obesity"
+  puts "#{test}: Morbid obesity"
 else
-  texto = 'Not a valid value'
+  puts 'Not a valid value'
 end
-
-puts texto
